@@ -17,7 +17,7 @@
       --red: #ef4444;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg); color: var(--text); padding-bottom: 80px; }
+    body { background: var(--bg); color: var(--text); padding-bottom: 84px; }
     .banner { background: #1c1917; text-align: center; padding: 8px 12px; font-size: 12px; border-bottom: 1px solid var(--border); }
     .banner span { color: var(--gold); font-weight: 700; }
     header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; position: sticky; top: 0; background: rgba(15,15,17,0.92); backdrop-filter: blur(8px); z-index: 50; border-bottom: 1px solid var(--border); }
@@ -28,29 +28,83 @@
     .container { max-width: 960px; margin: 0 auto; padding: 20px; }
     .view { display: none; }
     .view.active { display: block; }
-    .hero { padding: 32px 0; border-bottom: 1px solid var(--border); }
-    .pill { display: inline-block; background: #27272a; color: var(--gold); font-size: 12px; padding: 4px 12px; border-radius: 999px; margin-bottom: 16px; }
-    h1 { font-size: 36px; line-height: 1.15; margin-bottom: 14px; }
+
+    /* Hero */
+    .hero { padding: 24px 0 32px; border-bottom: 1px solid var(--border); }
+    .pill { display: inline-block; background: #27272a; color: var(--gold); font-size: 12px; padding: 5px 14px; border-radius: 999px; margin-bottom: 16px; font-weight: 600; }
+    h1 { font-size: 38px; line-height: 1.12; margin-bottom: 14px; font-weight: 800; letter-spacing: -0.8px; }
     h1 em { color: var(--gold); font-style: italic; }
     .hero p { color: var(--muted); font-size: 15px; line-height: 1.6; margin-bottom: 24px; }
-    .btn { display: inline-block; padding: 14px 24px; border-radius: 999px; font-weight: 700; font-size: 14px; border: none; cursor: pointer; text-align: center; }
+    .btn { display: inline-block; padding: 14px 24px; border-radius: 999px; font-weight: 700; font-size: 14px; border: none; cursor: pointer; text-align: center; transition: opacity 0.2s; }
+    .btn:active { opacity: 0.85; }
     .btn-gold { background: var(--gold); color: #000; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
     .btn-ghost { background: #27272a; color: var(--text); }
-    .btn-block { width: 100%; display: block; margin-bottom: 10px; }
+    .btn-block { width: 100%; display: block; margin-bottom: 12px; }
+    .btn-sm { padding: 8px 12px; font-size: 12px; border-radius: 10px; }
+
+    /* Features */
     .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 24px 0; }
-    .feat-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px; }
-    .feat-card h4 { font-size: 14px; margin-bottom: 4px; }
-    .feat-card p { font-size: 12px; color: var(--muted); }
-    .sec-title { font-size: 22px; margin: 28px 0 16px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
-    .prod-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 14px; display: flex; flex-direction: column; justify-content: space-between; }
-    .prod-tag { font-size: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-    .prod-name { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
-    .prod-price { font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
-    .prod-stock { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
-    .prod-actions { display: flex; gap: 8px; }
-    .btn-sm { padding: 8px 12px; font-size: 12px; border-radius: 10px; flex: 1; }
-    input, select, textarea { width: 100%; background: #09090b; border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 10px; font-size: 14px; margin-bottom: 10px; }
+    .feat-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px; display: flex; gap: 12px; align-items: flex-start; }
+    .feat-icon { width: 34px; height: 34px; border-radius: 10px; background: rgba(234,179,8,0.12); color: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+    .feat-card h4 { font-size: 14px; margin-bottom: 3px; }
+    .feat-card p { font-size: 12px; color: var(--muted); line-height: 1.35; }
+
+    /* Flash Sale Red Box */
+    .flash-box { background: linear-gradient(180deg, #991b1b 0%, #450a0a 100%); border-radius: 20px; padding: 20px 16px; margin: 28px 0; border: 1px solid #b91c1c; }
+    .flash-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+    .flash-title { font-size: 24px; font-weight: 800; line-height: 1.1; }
+    .flash-sub { font-size: 12px; color: #fecaca; margin-top: 4px; }
+    .timer-row { display: flex; gap: 6px; align-items: center; }
+    .timer-box { background: #fff; color: #000; font-weight: 800; font-size: 14px; padding: 6px 8px; border-radius: 8px; min-width: 34px; text-align: center; }
+    .h-scroll { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
+    .h-scroll::-webkit-scrollbar { display: none; }
+
+    /* Product Card (Original Style with Perfume Bottle Illustration) */
+    .p-card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; }
+    .flash-box .p-card { min-width: 175px; max-width: 175px; flex-shrink: 0; border-color: rgba(255,255,255,0.1); }
+    .p-art { height: 155px; position: relative; display: flex; align-items: center; justify-content: center; }
+    .p-badges { position: absolute; top: 10px; left: 10px; display: flex; flex-direction: column; gap: 4px; z-index: 2; }
+    .b-flash { background: #ef4444; color: #fff; font-size: 9px; font-weight: 800; padding: 3px 6px; border-radius: 4px; letter-spacing: 0.4px; }
+    .b-top { background: #f59e0b; color: #000; font-size: 9px; font-weight: 800; padding: 3px 6px; border-radius: 4px; letter-spacing: 0.4px; }
+    .wish-circle { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50%; background: rgba(15,15,17,0.75); border: 1px solid rgba(255,255,255,0.15); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; z-index: 2; }
+    .p-body { padding: 12px; }
+    .p-cat { font-size: 10px; color: var(--gold); font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 4px; }
+    .p-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .p-rating { font-size: 11px; color: var(--muted); margin-bottom: 10px; }
+    .p-rating span { color: var(--gold); }
+    .p-footer { display: flex; justify-content: space-between; align-items: flex-end; }
+    .p-price { font-size: 16px; font-weight: 800; color: var(--text); }
+    .p-old { font-size: 11px; color: var(--muted); text-decoration: line-through; margin-right: 4px; }
+    .p-disc { background: rgba(239,68,68,0.2); color: #f87171; font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; }
+    .bag-btn { width: 32px; height: 32px; border-radius: 10px; background: #27272a; border: 1px solid var(--border); color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; flex-shrink: 0; }
+    .bag-btn:active { background: var(--gold); color: #000; }
+
+    /* Mood Cards & Sections */
+    .sec-kicker { font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 28px; margin-bottom: 4px; }
+    .sec-title { font-size: 24px; font-weight: 800; margin-bottom: 16px; }
+    .mood-card { min-width: 145px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px; cursor: pointer; flex-shrink: 0; }
+    .mood-card h4 { font-size: 15px; margin-bottom: 4px; }
+    .mood-card p { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    @media (min-width: 640px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .story-box { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 22px; margin: 28px 0; }
+    .story-box h3 { font-size: 22px; line-height: 1.3; margin: 8px 0 18px; font-weight: 700; }
+    .review-card { min-width: 240px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px; flex-shrink: 0; }
+    .review-quote { color: var(--gold); font-size: 24px; font-weight: 900; line-height: 1; margin-bottom: 8px; }
+
+    /* Modal Detail & Quiz */
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 100; display: none; align-items: center; justify-content: center; padding: 20px; }
+    .modal-backdrop.open { display: flex; }
+    .modal-box { background: var(--card); border: 1px solid var(--border); border-radius: 22px; max-width: 420px; width: 100%; padding: 20px; position: relative; }
+    .modal-close { position: absolute; top: 14px; right: 16px; background: none; border: none; color: var(--muted); font-size: 22px; cursor: pointer; }
+
+    /* Floating WA */
+    .wa-float { position: fixed; bottom: 76px; right: 18px; width: 52px; height: 52px; border-radius: 50%; background: #22c55e; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 6px 20px rgba(34,197,94,0.35); z-index: 45; text-decoration: none; }
+
+    /* Form & Admin */
+    input, select, textarea { width: 100%; background: #09090b; border: 1px solid var(--border); color: var(--text); padding: 11px 12px; border-radius: 10px; font-size: 14px; margin-bottom: 10px; }
     .admin-tabs { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 16px; }
     .tab-btn { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 8px 16px; border-radius: 999px; font-size: 13px; cursor: pointer; white-space: nowrap; }
     .tab-btn.active { background: var(--text); color: #000; font-weight: 700; }
@@ -64,11 +118,13 @@
     .admin-table input[type="text"], .admin-table input[type="number"] { margin-bottom: 0; padding: 8px; font-size: 13px; }
     .admin-table input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--gold); }
     .cart-item { display: flex; justify-content: space-between; align-items: center; background: var(--card); padding: 12px; border-radius: 12px; margin-bottom: 10px; border: 1px solid var(--border); }
+    .order-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+    .status-badge { display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; background: #27272a; color: var(--gold); }
+
+    /* Bottom Nav */
     .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #121214; border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 10px 0; z-index: 50; }
     .nav-item { background: none; border: none; color: var(--muted); font-size: 11px; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; }
     .nav-item.active { color: var(--gold); font-weight: 700; }
-    .order-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 12px; }
-    .status-badge { display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; background: #27272a; color: var(--gold); }
   </style>
 </head>
 <body>
@@ -87,30 +143,97 @@
     <!-- BERANDA -->
     <section id="v-beranda" class="view active">
       <div class="hero">
-        <div class="pill">✦ Extrait de Parfum Premium</div>
+        <div class="pill">✦ 30 Aroma Extrait de Parfum</div>
         <h1>Wangi yang bikin <em>semua menoleh.</em></h1>
-        <p>Parfum lokal berkualitas premium Go-goyan, awet 8–12 jam dengan harga bersahabat. Bayar mudah via QRIS, e-wallet, atau transfer bank.</p>
+        <p>Parfum premium Go-goyan, awet 8–12 jam dengan harga bersahabat. Bayar mudah via QRIS, e-wallet, atau transfer bank.</p>
         <button class="btn btn-gold btn-block" onclick="navigate('katalog')">Belanja Sekarang →</button>
+        <button class="btn btn-outline btn-block" onclick="openQuiz()">✦ Cari Aroma Karaktermu</button>
       </div>
 
       <div class="features">
-        <div class="feat-card"><h4>Original</h4><p>Racikan bibit premium</p></div>
-        <div class="feat-card"><h4>Gratis Ongkir</h4><p>Min. belanja Rp250rb</p></div>
-        <div class="feat-card"><h4>Bayar Mudah</h4><p>QRIS, E-wallet, Bank</p></div>
-        <div class="feat-card"><h4>Awet 8–12 Jam</h4><p>Extrait de Parfum</p></div>
+        <div class="feat-card"><div class="feat-icon">🛡️</div><div><h4>Original</h4><p>Racikan bibit premium</p></div></div>
+        <div class="feat-card"><div class="feat-icon">🚚</div><div><h4>Gratis Ongkir</h4><p>Min. belanja Rp250rb</p></div></div>
+        <div class="feat-card"><div class="feat-icon">💳</div><div><h4>Bayar Mudah</h4><p>QRIS, E-wallet, Bank</p></div></div>
+        <div class="feat-card"><div class="feat-icon">🕒</div><div><h4>Awet 8–12 Jam</h4><p>Extrait de Parfum</p></div></div>
       </div>
 
-      <h2 class="sec-title">🔥 Flash Sale</h2>
-      <div class="grid" id="flashGrid"></div>
+      <!-- FLASH SALE -->
+      <div class="flash-box">
+        <div class="flash-header">
+          <div>
+            <div class="flash-title">🔥 Flash Sale</div>
+            <div class="flash-sub">Harga spesial, berakhir dalam</div>
+            <div style="font-size:12px; font-weight:700; margin-top:6px; cursor:pointer;" onclick="navigate('katalog')">Lihat semua →</div>
+          </div>
+          <div class="timer-row">
+            <div class="timer-box" id="tHour">11</div><span>:</span>
+            <div class="timer-box" id="tMin">28</div><span>:</span>
+            <div class="timer-box" id="tSec">50</div>
+          </div>
+        </div>
+        <div class="h-scroll" id="flashScroll"></div>
+      </div>
 
-      <h2 class="sec-title">Koleksi Parfum</h2>
-      <div class="grid" id="homeGrid"></div>
+      <!-- MOOD -->
+      <div class="sec-kicker">KELUARGA AROMA</div>
+      <div class="sec-title">Pilih sesuai mood-mu</div>
+      <div class="h-scroll">
+        <div class="mood-card" onclick="filterByMood('AQUATIC')"><h4>Fresh Citrus</h4><p>Jeruk segar ceria</p><span>→</span></div>
+        <div class="mood-card" onclick="filterByMood('GOURMAND')"><h4>Gourmand</h4><p>Manis bikin nagih</p><span>→</span></div>
+        <div class="mood-card" onclick="filterByMood('ORIENTAL')"><h4>Oriental</h4><p>Hangat berempah</p><span>→</span></div>
+        <div class="mood-card" onclick="filterByMood('FLORAL')"><h4>Floral</h4><p>Bunga elegan</p><span>→</span></div>
+        <div class="mood-card" onclick="filterByMood('WOODY')"><h4>Woody</h4><p>Kayu maskulin</p><span>→</span></div>
+      </div>
+
+      <!-- PARFUM TERLARIS -->
+      <div class="sec-kicker">PALING DICARI</div>
+      <div class="sec-title">Parfum Terlaris</div>
+      <div class="grid" id="bestGrid"></div>
+
+      <!-- CERITA KAMI -->
+      <div class="story-box">
+        <div class="sec-kicker" style="margin-top:0;">CERITA KAMI</div>
+        <h3>Diracik di Indonesia, terinspirasi aroma rempah, bunga dan kayu Nusantara.</h3>
+        <div style="border-top:1px solid var(--border); padding-top:18px;">
+          <div style="font-size:20px; margin-bottom:6px;">✦</div>
+          <h4 style="font-size:20px; margin-bottom:6px;">Bingung pilih aroma?</h4>
+          <p style="font-size:13px; color:var(--muted); margin-bottom:16px;">Jawab 3 pertanyaan singkat dan kami rekomendasikan parfum yang paling cocok dengan karaktermu.</p>
+          <button class="btn btn-gold btn-block" onclick="openQuiz()">Mulai Kuis Aroma →</button>
+          <a id="waQuizLink" href="https://wa.me/62895402144361" target="_blank" class="btn btn-outline btn-block" style="text-decoration:none; margin-bottom:0;">💬 Tanya Asisten Aroma (WA)</a>
+        </div>
+      </div>
+
+      <!-- KOLEKSI TERBARU -->
+      <div class="sec-kicker">BARU RILIS</div>
+      <div class="sec-title">Koleksi Terbaru</div>
+      <div class="grid" id="newGrid"></div>
+
+      <!-- ULASAN PELANGGAN -->
+      <div class="sec-kicker">ULASAN PELANGGAN</div>
+      <div class="sec-title">Kata mereka tentang Go-goyan</div>
+      <div class="h-scroll">
+        <div class="review-card">
+          <div class="review-quote">“</div>
+          <p style="font-size:13px; margin-bottom:12px;">Wanginya lembut dan tahan lama sepanjang hari. Sudah repeat order 3 kali!</p>
+          <strong>Sari</strong><div style="font-size:11px; color:var(--muted);">Melati Putih · <span style="color:var(--gold);">★★★★★</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-quote">“</div>
+          <p style="font-size:13px; margin-bottom:12px;">Wanginya awet banget, dari pagi sampai sore masih kecium. Recommended!</p>
+          <strong>Fajar</strong><div style="font-size:11px; color:var(--muted);">Amber Sultan · <span style="color:var(--gold);">★★★★★</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-quote">“</div>
+          <p style="font-size:13px; margin-bottom:12px;">Kesan mahal, tahan sampai malam. Mantap buat acara formal.</p>
+          <strong>Hendra</strong><div style="font-size:11px; color:var(--muted);">Goyang Oud Noir · <span style="color:var(--gold);">★★★★★</span></div>
+        </div>
+      </div>
     </section>
 
     <!-- KATALOG -->
     <section id="v-katalog" class="view">
       <h2 class="sec-title">Semua Katalog Parfum</h2>
-      <input type="text" id="searchInput" placeholder="Cari nama parfum..." oninput="renderCatalog()" />
+      <input type="text" id="searchInput" placeholder="Cari nama atau kategori parfum..." oninput="renderCatalog()" />
       <div class="grid" id="catalogGrid"></div>
     </section>
 
@@ -168,7 +291,7 @@
           <div style="font-size:11px; color:var(--gold); letter-spacing:1px; font-weight:700;">ADMIN</div>
           <h2 style="font-size:28px;">Panel Toko</h2>
         </div>
-        <button class="btn btn-ghost btn-sm" style="flex:none;" onclick="logoutAdmin()">Keluar Admin</button>
+        <button class="btn btn-ghost btn-sm" onclick="logoutAdmin()">Keluar Admin</button>
       </div>
 
       <div class="admin-tabs">
@@ -178,7 +301,6 @@
         <button class="tab-btn" onclick="switchAdminTab('pengaturan', this)">Pengaturan</button>
       </div>
 
-      <!-- Tab Dashboard -->
       <div id="adm-dashboard" class="adm-sub">
         <div class="stat-grid">
           <div class="stat-box"><span>Omzet Terverifikasi</span><h3 id="statOmzet">Rp0</h3></div>
@@ -188,16 +310,14 @@
         </div>
       </div>
 
-      <!-- Tab Pesanan -->
       <div id="adm-pesanan" class="adm-sub" style="display:none;">
         <div id="adminOrdersList"></div>
       </div>
 
-      <!-- Tab Produk -->
       <div id="adm-produk" class="adm-sub" style="display:none;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
           <span style="font-size:13px; color:var(--muted);">Edit nama, harga, atau stok langsung di bawah:</span>
-          <button class="btn btn-ghost btn-sm" style="flex:none;" onclick="addNewProductRow()">+ Produk Baru</button>
+          <button class="btn btn-ghost btn-sm" onclick="addNewProductRow()">+ Produk Baru</button>
         </div>
         <div style="overflow-x:auto;">
           <table class="admin-table">
@@ -216,7 +336,6 @@
         <button class="btn btn-gold btn-block" style="margin-top:16px;" onclick="saveAllProducts()">Simpan Semua Perubahan</button>
       </div>
 
-      <!-- Tab Pengaturan -->
       <div id="adm-pengaturan" class="adm-sub" style="display:none;">
         <label style="font-size:12px; color:var(--muted);">Nomor WhatsApp Toko</label>
         <input type="text" id="setWa" placeholder="62895402144361" />
@@ -231,7 +350,27 @@
     </section>
   </div>
 
-  <!-- Navigasi Bawah Khusus Pengunjung (Tombol Admin Disembunyikan) -->
+  <!-- MODAL DETAIL PRODUK -->
+  <div class="modal-backdrop" id="detailModal" onclick="if(event.target===this) closeModal('detailModal')">
+    <div class="modal-box" id="detailModalContent"></div>
+  </div>
+
+  <!-- MODAL KUIS AROMA -->
+  <div class="modal-backdrop" id="quizModal" onclick="if(event.target===this) closeModal('quizModal')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('quizModal')">✕</button>
+      <div class="sec-kicker" style="margin-top:0;">KUIS AROMA</div>
+      <h3 style="font-size:20px; margin-bottom:12px;">Temukan Parfum Karaktermu</h3>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">Pilih suasana yang paling menggambarkan dirimu:</p>
+      <button class="btn btn-ghost btn-block" onclick="finishQuiz('p1')">👔 Elegan, Tegas & Malam Hari</button>
+      <button class="btn btn-ghost btn-block" onclick="finishQuiz('p3')">🌸 Lembut, Romantis & Anggun</button>
+      <button class="btn btn-ghost btn-block" onclick="finishQuiz('p4')">🍰 Manis, Hangat & Bikin Nagih</button>
+      <button class="btn btn-ghost btn-block" onclick="finishQuiz('p8')">🌊 Segar, Aktif & Kasual Harian</button>
+    </div>
+  </div>
+
+  <a id="waFloatBtn" href="https://wa.me/62895402144361" target="_blank" class="wa-float">📞</a>
+
   <nav class="bottom-nav">
     <button class="nav-item active" id="nav-beranda" onclick="navigate('beranda')"><span>🏠</span>Beranda</button>
     <button class="nav-item" id="nav-katalog" onclick="navigate('katalog')"><span>▦</span>Katalog</button>
@@ -240,7 +379,6 @@
     <button class="nav-item" id="nav-lacak" onclick="navigate('lacak')"><span>📦</span>Lacak</button>
   </nav>
 
-  <!-- Firebase Modular SDK & App Logic -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import {
@@ -261,7 +399,6 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // KATA SANDI ADMIN DIUBAH MENJADI 2000
     const ADMIN_PASSWORD = "2000";
     let isAdminAuthenticated = false;
     let logoTapCount = 0;
@@ -280,18 +417,30 @@
     };
 
     const defaultProducts = [
-      { id: "p1", name: "Goyang Oud Noir", category: "WOODY · PRIA", price: 279000, stock: 50, flash: true },
-      { id: "p2", name: "Senja Jakarta", category: "AMBER · UNISEX", price: 259000, stock: 50, flash: false },
-      { id: "p3", name: "Melati Putih", category: "FLORAL · WANITA", price: 159000, stock: 50, flash: true },
-      { id: "p4", name: "Vanilla Kiss", category: "GOURMAND · WANITA", price: 189000, stock: 50, flash: true },
-      { id: "p5", name: "Rose Velvet", category: "FLORAL · WANITA", price: 199000, stock: 50, flash: false },
-      { id: "p6", name: "Kopi Tubruk", category: "GOURMAND · UNISEX", price: 139000, stock: 50, flash: false },
-      { id: "p7", name: "Amber Sultan", category: "ORIENTAL · PRIA", price: 329000, stock: 50, flash: true },
-      { id: "p8", name: "Aqua Fresh", category: "AQUATIC · UNISEX", price: 119000, stock: 50, flash: true }
+      { id: "p1", name: "Goyang Oud Noir", category: "WOODY · PRIA", price: 279000, oldPrice: 349000, stock: 50, flash: true, rating: "4.3 | 779 terjual", bg: "#f5e6d3", bottle: "#d97757", desc: "Extrait de Parfum 30 ml, awet 8–12 jam. Top note segar, heart note woody, base note hangat yang meninggalkan jejak." },
+      { id: "p2", name: "Senja Jakarta", category: "ORIENTAL · UNISEX", price: 259000, oldPrice: 0, stock: 50, flash: false, rating: "4.3 | 52 terjual", bg: "#ede9fe", bottle: "#8b5cf6", desc: "Aroma amber dan rempah hangat yang cocok untuk suasana senja hingga malam hari." },
+      { id: "p3", name: "Melati Putih", category: "FLORAL · WANITA", price: 159000, oldPrice: 199000, stock: 50, flash: true, rating: "4.5 | 449 terjual", bg: "#fce7f3", bottle: "#ec4899", desc: "Keharuman bunga melati Nusantara yang lembut, bersih, dan elegan sepanjang hari." },
+      { id: "p4", name: "Vanilla Kiss", category: "GOURMAND · WANITA", price: 189000, oldPrice: 229000, stock: 50, flash: true, rating: "5.0 | 846 terjual", bg: "#fef3c7", bottle: "#f59e0b", desc: "Perpaduan manis vanila creamy dan karamel lembut yang memikat." },
+      { id: "p5", name: "Rose Velvet", category: "FLORAL · WANITA", price: 199000, oldPrice: 0, stock: 50, flash: false, rating: "4.3 | 897 terjual", bg: "#ffe4e6", bottle: "#e11d48", desc: "Mawar merah klasik dengan sentuhan powdery lembut yang feminin." },
+      { id: "p6", name: "Kopi Tubruk", category: "GOURMAND · UNISEX", price: 139000, oldPrice: 0, stock: 50, flash: false, rating: "5.0 | 610 terjual", bg: "#f3e8d2", bottle: "#78350f", desc: "Aroma biji kopi panggang autentik dengan sentuhan gula aren." },
+      { id: "p7", name: "Amber Sultan", category: "ORIENTAL · UNISEX", price: 329000, oldPrice: 389000, stock: 50, flash: true, rating: "4.7 | 571 terjual", bg: "#ffedd5", bottle: "#ea580c", desc: "Kombinasi mewah amber, safron, dan kayu gaharu berkarakter kuat." },
+      { id: "p8", name: "Aqua Fresh", category: "AQUATIC · UNISEX", price: 119000, oldPrice: 149000, stock: 50, flash: true, rating: "4.5 | 428 terjual", bg: "#e0f2fe", bottle: "#0284c7", desc: "Kesegaran laut dan citrus yang ringan untuk aktivitas harian." }
     ];
 
+    function getBottleSVG(color) {
+      return `
+        <svg width="76" height="106" viewBox="0 0 80 110" fill="none">
+          <rect x="28" y="8" width="24" height="16" rx="4" fill="#18181b"/>
+          <rect x="33" y="24" width="14" height="8" fill="#a1a1aa"/>
+          <rect x="16" y="32" width="48" height="68" rx="12" fill="${color || '#d97757'}"/>
+          <rect x="24" y="46" width="32" height="36" rx="4" fill="#fafafa" fill-opacity="0.9"/>
+          <line x1="30" y1="58" x2="50" y2="58" stroke="#18181b" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="34" y1="66" x2="46" y2="66" stroke="#71717a" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      `;
+    }
+
     async function initDatabase() {
-      // Tampilkan produk bawaan sementara agar halaman langsung terisi
       products = [...defaultProducts];
       renderAllViews();
 
@@ -300,15 +449,16 @@
         const snap = await getDocs(prodCol);
         if (snap.empty) {
           const batch = writeBatch(db);
-          defaultProducts.forEach(p => {
-            batch.set(doc(db, "products", p.id), p);
-          });
+          defaultProducts.forEach(p => batch.set(doc(db, "products", p.id), p));
           await batch.commit();
         }
 
         onSnapshot(prodCol, (snapshot) => {
           if (!snapshot.empty) {
-            products = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+            products = snapshot.docs.map(d => {
+              const def = defaultProducts.find(x => x.id === d.id) || {};
+              return { ...def, id: d.id, ...d.data() };
+            });
             renderAllViews();
             renderAdminProducts();
             updateDashboardStats();
@@ -322,30 +472,38 @@
           updateDashboardStats();
         });
 
-        const setRef = doc(db, "settings", "store");
-        onSnapshot(setRef, (docSnap) => {
-          if (docSnap.exists()) {
-            storeSettings = { ...storeSettings, ...docSnap.data() };
-          }
+        onSnapshot(doc(db, "settings", "store"), (docSnap) => {
+          if (docSnap.exists()) storeSettings = { ...storeSettings, ...docSnap.data() };
           document.getElementById("setWa").value = storeSettings.wa || "";
           document.getElementById("setBca").value = storeSettings.bca || "";
           document.getElementById("setMandiri").value = storeSettings.mandiri || "";
           document.getElementById("setEwallet").value = storeSettings.ewallet || "";
+          document.getElementById("waFloatBtn").href = "https://wa.me/" + storeSettings.wa;
+          document.getElementById("waQuizLink").href = "https://wa.me/" + storeSettings.wa;
           updatePaymentInfo();
         });
       } catch (err) {
-        console.error("Gagal memuat Firestore:", err);
+        console.error(err);
       }
     }
 
-    // Ketuk Logo 5 Kali untuk Akses Rahasia Admin
+    // Countdown Timer Flash Sale
+    setInterval(() => {
+      let h = Number(document.getElementById("tHour").textContent);
+      let m = Number(document.getElementById("tMin").textContent);
+      let s = Number(document.getElementById("tSec").textContent);
+      if (s > 0) s--;
+      else { s = 59; if (m > 0) m--; else { m = 59; h = h > 0 ? h - 1 : 11; } }
+      document.getElementById("tHour").textContent = String(h).padStart(2, "0");
+      document.getElementById("tMin").textContent = String(m).padStart(2, "0");
+      document.getElementById("tSec").textContent = String(s).padStart(2, "0");
+    }, 1000);
+
+    // Ketuk Logo 5 Kali untuk Masuk Admin
     window.handleLogoTap = function () {
       logoTapCount++;
       clearTimeout(logoTapTimer);
-      logoTapTimer = setTimeout(() => {
-        logoTapCount = 0;
-      }, 2000);
-
+      logoTapTimer = setTimeout(() => { logoTapCount = 0; }, 2000);
       if (logoTapCount >= 5) {
         logoTapCount = 0;
         navigate("admin");
@@ -372,22 +530,16 @@
     };
 
     window.navigate = function (route) {
-      if (route === "admin") {
-        if (!window.checkAdmin()) {
-          window.location.hash = "#beranda";
-          return;
-        }
+      if (route === "admin" && !window.checkAdmin()) {
+        window.location.hash = "#beranda";
+        return;
       }
-
       window.location.hash = "#" + route;
       document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
       document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
-
-      const targetView = document.getElementById("v-" + route) || document.getElementById("v-beranda");
-      targetView.classList.add("active");
-
-      const targetNav = document.getElementById("nav-" + route);
-      if (targetNav) targetNav.classList.add("active");
+      (document.getElementById("v-" + route) || document.getElementById("v-beranda")).classList.add("active");
+      const nav = document.getElementById("nav-" + route);
+      if (nav) nav.classList.add("active");
 
       if (route === "keranjang") renderCart();
       if (route === "wishlist") renderWishlist();
@@ -397,34 +549,39 @@
         renderAdminOrders();
         updateDashboardStats();
       }
+      window.scrollTo(0, 0);
     };
-
-    window.addEventListener("hashchange", () => {
-      const hash = window.location.hash.replace("#", "") || "beranda";
-      navigate(hash);
-    });
 
     function formatRp(num) {
       return "Rp" + Number(num || 0).toLocaleString("id-ID");
     }
 
-    function createProductCard(p) {
+    function createCardHTML(p) {
       const isWished = wishlist.includes(p.id);
+      const oldPrice = p.oldPrice || Math.round(p.price * 1.25);
+      const discPct = p.flash ? Math.round((1 - p.price / oldPrice) * 100) : 0;
+
       return `
-        <div class="prod-card">
-          <div>
-            <div class="prod-tag">${p.category || "PARFUM"}</div>
-            <div class="prod-name">${p.name}</div>
-            <div class="prod-price">${formatRp(p.price)}</div>
-            <div class="prod-stock">Stok: ${p.stock}</div>
+        <div class="p-card" onclick="openProductDetail('${p.id}')">
+          <div class="p-art" style="background:${p.bg || '#f5e6d3'};">
+            <div class="p-badges">
+              ${p.flash ? '<span class="b-flash">FLASH SALE</span>' : ''}
+              <span class="b-top">TERLARIS</span>
+            </div>
+            <button class="wish-circle" onclick="event.stopPropagation(); toggleWish('${p.id}')">${isWished ? '❤️' : '♡'}</button>
+            ${getBottleSVG(p.bottle)}
           </div>
-          <div class="prod-actions">
-            <button class="btn btn-gold btn-sm" ${p.stock <= 0 ? "disabled" : ""} onclick="addToCart('${p.id}')">
-              ${p.stock > 0 ? "+ Keranjang" : "Habis"}
-            </button>
-            <button class="btn btn-ghost btn-sm" style="flex:0;" onclick="toggleWish('${p.id}')">
-              ${isWished ? "❤️" : "♡"}
-            </button>
+          <div class="p-body">
+            <div class="p-cat">${p.category || 'EXTRAIT · UNISEX'}</div>
+            <div class="p-title">${p.name}</div>
+            <div class="p-rating"><span>★★★★★</span> ${p.rating || '4.8 | 210 terjual'}</div>
+            <div class="p-footer">
+              <div>
+                <div class="p-price">${formatRp(p.price)}</div>
+                ${p.flash ? `<div><span class="p-old">${formatRp(oldPrice)}</span><span class="p-disc">-${discPct}%</span></div>` : `<div style="font-size:11px; color:var(--muted);">Stok: ${p.stock}</div>`}
+              </div>
+              <button class="bag-btn" onclick="event.stopPropagation(); addToCart('${p.id}')">🛍️</button>
+            </div>
           </div>
         </div>
       `;
@@ -432,53 +589,84 @@
 
     function renderAllViews() {
       const flash = products.filter(p => p.flash);
-      document.getElementById("flashGrid").innerHTML = flash.map(createProductCard).join("");
-      document.getElementById("homeGrid").innerHTML = products.map(createProductCard).join("");
+      document.getElementById("flashScroll").innerHTML = flash.map(createCardHTML).join("");
+      document.getElementById("bestGrid").innerHTML = products.slice(0, 4).map(createCardHTML).join("");
+      document.getElementById("newGrid").innerHTML = products.slice(4).map(createCardHTML).join("");
       renderCatalog();
       renderWishlist();
       updateBadges();
     }
 
+    window.filterByMood = function (keyword) {
+      navigate("katalog");
+      document.getElementById("searchInput").value = keyword;
+      renderCatalog();
+    };
+
     window.renderCatalog = function () {
       const q = (document.getElementById("searchInput")?.value || "").toLowerCase();
-      const filtered = products.filter(p => p.name.toLowerCase().includes(q));
-      document.getElementById("catalogGrid").innerHTML = filtered.map(createProductCard).join("");
+      const filtered = products.filter(p =>
+        p.name.toLowerCase().includes(q) || (p.category || "").toLowerCase().includes(q)
+      );
+      document.getElementById("catalogGrid").innerHTML = filtered.map(createCardHTML).join("");
+    };
+
+    window.openProductDetail = function (id) {
+      const p = products.find(x => x.id === id);
+      if (!p) return;
+      const isWished = wishlist.includes(p.id);
+      document.getElementById("detailModalContent").innerHTML = `
+        <button class="modal-close" onclick="closeModal('detailModal')">✕</button>
+        <div class="sec-kicker" style="margin-top:0;">${p.category}</div>
+        <div style="background:${p.bg || '#f5e6d3'}; border-radius:16px; height:170px; display:flex; align-items:center; justify-content:center; margin:12px 0;">
+          ${getBottleSVG(p.bottle)}
+        </div>
+        <h3 style="font-size:24px; margin-bottom:6px;">${p.name}</h3>
+        <div class="p-rating" style="margin-bottom:10px;"><span>★★★★★</span> ${p.rating || '4.8 | Terlaris'} · Stok: ${p.stock}</div>
+        <p style="font-size:13px; color:var(--muted); line-height:1.5; margin-bottom:16px;">${p.desc || 'Extrait de Parfum 30 ml, awet 8–12 jam.'}</p>
+        <div style="font-size:22px; font-weight:800; margin-bottom:16px;">${formatRp(p.price)}</div>
+        <div style="display:flex; gap:10px;">
+          <button class="btn btn-gold" style="flex:1;" onclick="addToCart('${p.id}'); closeModal('detailModal')">Tambah ke Keranjang</button>
+          <button class="btn btn-ghost" onclick="toggleWish('${p.id}'); openProductDetail('${p.id}')">${isWished ? '❤️' : '♡'}</button>
+        </div>
+      `;
+      document.getElementById("detailModal").classList.add("open");
+    };
+
+    window.openQuiz = function () { document.getElementById("quizModal").classList.add("open"); };
+    window.closeModal = function (id) { document.getElementById(id).classList.remove("open"); };
+    window.finishQuiz = function (prodId) {
+      closeModal("quizModal");
+      openProductDetail(prodId);
     };
 
     window.renderWishlist = function () {
       const wishedProds = products.filter(p => wishlist.includes(p.id));
       document.getElementById("wishGrid").innerHTML = wishedProds.length
-        ? wishedProds.map(createProductCard).join("")
-        : "<p style='color:var(--muted);'>Belum ada parfum favorit.</p>";
+        ? wishedProds.map(createCardHTML).join("")
+        : "<p style='color:var(--muted); grid-column:1/-1; text-align:center; padding:32px 0;'>Belum ada parfum favorit.</p>";
     };
 
     window.toggleWish = function (id) {
-      if (wishlist.includes(id)) {
-        wishlist = wishlist.filter(w => w !== id);
-      } else {
-        wishlist.push(id);
-      }
+      if (wishlist.includes(id)) wishlist = wishlist.filter(w => w !== id);
+      else wishlist.push(id);
       localStorage.setItem("gg_wish", JSON.stringify(wishlist));
       renderAllViews();
     };
 
     window.addToCart = function (id) {
       const prod = products.find(p => p.id === id);
-      if (!prod || prod.stock <= 0) return;
+      if (!prod || prod.stock <= 0) { alert("Stok habis!"); return; }
       const existing = cart.find(c => c.id === id);
-      if (existing) {
-        if (existing.qty < prod.stock) existing.qty++;
-      } else {
-        cart.push({ id: prod.id, name: prod.name, price: prod.price, qty: 1 });
-      }
+      if (existing) { if (existing.qty < prod.stock) existing.qty++; }
+      else cart.push({ id: prod.id, name: prod.name, price: prod.price, qty: 1 });
       localStorage.setItem("gg_cart", JSON.stringify(cart));
       updateBadges();
       alert(prod.name + " ditambahkan ke keranjang!");
     };
 
     function updateBadges() {
-      const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-      document.getElementById("cartBadge").textContent = totalQty;
+      document.getElementById("cartBadge").textContent = cart.reduce((s, i) => s + i.qty, 0);
       document.getElementById("wishBadge").textContent = wishlist.length;
     }
 
@@ -507,11 +695,9 @@
 
       const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
       const discount = Math.round(subtotal * activeDiscount);
-      const grand = subtotal - discount;
-
       document.getElementById("subTotalText").textContent = formatRp(subtotal);
       document.getElementById("discountText").textContent = "-" + formatRp(discount);
-      document.getElementById("grandTotalText").textContent = formatRp(grand);
+      document.getElementById("grandTotalText").textContent = formatRp(subtotal - discount);
       updatePaymentInfo();
     };
 
@@ -525,13 +711,8 @@
 
     window.applyVoucher = function () {
       const code = document.getElementById("voucherInput").value.trim().toUpperCase();
-      if (code === "GOGOYAN10") {
-        activeDiscount = 0.10;
-        alert("Voucher GOGOYAN10 berhasil dipakai (Diskon 10%)!");
-      } else {
-        activeDiscount = 0;
-        alert("Kode voucher tidak valid.");
-      }
+      if (code === "GOGOYAN10") { activeDiscount = 0.10; alert("Diskon 10% diterapkan!"); }
+      else { activeDiscount = 0; alert("Kode voucher tidak valid."); }
       renderCart();
     };
 
@@ -550,44 +731,28 @@
       const phone = document.getElementById("custPhone").value.trim();
       const address = document.getElementById("custAddress").value.trim();
       const method = document.getElementById("payMethod").value;
-
-      if (!name || !phone || !address) {
-        alert("Mohon lengkapi nama, nomor WhatsApp, dan alamat pengiriman.");
-        return;
-      }
+      if (!name || !phone || !address) { alert("Lengkapi nama, WhatsApp, dan alamat."); return; }
 
       const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
       const total = subtotal - Math.round(subtotal * activeDiscount);
       const orderCode = "GG" + Date.now().toString().slice(-8);
 
-      const orderData = {
-        code: orderCode,
-        customerName: name,
-        customerPhone: phone,
-        address: address,
-        paymentMethod: method,
-        items: cart,
-        total: total,
-        status: "Menunggu Verifikasi",
-        createdAt: Date.now()
-      };
-
-      await setDoc(doc(db, "orders", orderCode), orderData);
+      await setDoc(doc(db, "orders", orderCode), {
+        code: orderCode, customerName: name, customerPhone: phone, address,
+        paymentMethod: method, items: cart, total, status: "Menunggu Verifikasi", createdAt: Date.now()
+      });
 
       for (const item of cart) {
         const prod = products.find(p => p.id === item.id);
         if (prod) {
-          const newStock = Math.max(0, Number(prod.stock) - item.qty);
-          await updateDoc(doc(db, "products", prod.id), { stock: newStock });
+          await updateDoc(doc(db, "products", prod.id), { stock: Math.max(0, Number(prod.stock) - item.qty) });
         }
       }
 
-      cart = [];
-      activeDiscount = 0;
+      cart = []; activeDiscount = 0;
       localStorage.setItem("gg_cart", "[]");
-      updateBadges();
-      renderCart();
-      alert(`Pesanan berhasil dibuat!\nKode Pesanan Anda: ${orderCode}\nSimpan kode ini untuk melacak pesanan.`);
+      updateBadges(); renderCart();
+      alert(`Pesanan berhasil!\nKode Pesanan: ${orderCode}`);
       navigate("lacak");
       document.getElementById("trackCodeInput").value = orderCode;
       trackOrder();
@@ -598,23 +763,20 @@
       const resEl = document.getElementById("trackResult");
       if (!code) return;
       const snap = await getDoc(doc(db, "orders", code));
-      if (!snap.exists()) {
-        resEl.innerHTML = "<p style='color:var(--red);'>Kode pesanan tidak ditemukan.</p>";
-        return;
-      }
+      if (!snap.exists()) { resEl.innerHTML = "<p style='color:var(--red);'>Kode tidak ditemukan.</p>"; return; }
       const o = snap.data();
       resEl.innerHTML = `
         <div class="order-card">
           <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-            <strong>${o.code}</strong>
-            <span class="status-badge">${o.status}</span>
+            <strong>${o.code}</strong><span class="status-badge">${o.status}</span>
           </div>
           <p style="font-size:13px; color:var(--muted);">Penerima: ${o.customerName} (${o.customerPhone})</p>
-          <p style="font-size:13px; color:var(--muted); margin:4px 0;">Metode: ${o.paymentMethod} · Total: <strong style="color:var(--text);">${formatRp(o.total)}</strong></p>
+          <p style="font-size:13px; color:var(--muted); margin-top:4px;">Metode: ${o.paymentMethod} · Total: <strong style="color:var(--text);">${formatRp(o.total)}</strong></p>
         </div>
       `;
     };
 
+    // ADMIN FUNCTIONS
     window.switchAdminTab = function (tabName, btn) {
       document.querySelectorAll(".adm-sub").forEach(el => el.style.display = "none");
       document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
@@ -623,8 +785,7 @@
     };
 
     function renderAdminProducts() {
-      const tbody = document.getElementById("adminProductTbody");
-      tbody.innerHTML = products.map(p => `
+      document.getElementById("adminProductTbody").innerHTML = products.map(p => `
         <tr data-id="${p.id}">
           <td><input type="text" class="edit-name" value="${p.name}" /></td>
           <td><input type="number" class="edit-price" value="${p.price}" /></td>
@@ -638,55 +799,41 @@
     window.addNewProductRow = async function () {
       const newId = "p" + Date.now();
       await setDoc(doc(db, "products", newId), {
-        id: newId,
-        name: "Parfum Baru",
-        category: "EXTRAIT · UNISEX",
-        price: 199000,
-        stock: 25,
-        flash: false
+        id: newId, name: "Parfum Baru", category: "EXTRAIT · UNISEX",
+        price: 199000, stock: 25, flash: false, bg: "#f5e6d3", bottle: "#eab308"
       });
     };
 
     window.deleteProduct = async function (id) {
-      if (confirm("Hapus produk ini secara permanen?")) {
-        await deleteDoc(doc(db, "products", id));
-      }
+      if (confirm("Hapus produk ini?")) await deleteDoc(doc(db, "products", id));
     };
 
     window.saveAllProducts = async function () {
-      const rows = document.querySelectorAll("#adminProductTbody tr");
       const batch = writeBatch(db);
-
-      rows.forEach(row => {
+      document.querySelectorAll("#adminProductTbody tr").forEach(row => {
         const id = row.getAttribute("data-id");
-        const name = row.querySelector(".edit-name").value.trim();
-        const price = Number(row.querySelector(".edit-price").value) || 0;
-        const stock = Number(row.querySelector(".edit-stock").value) || 0;
-        const flash = row.querySelector(".edit-flash").checked;
-
-        batch.update(doc(db, "products", id), { name, price, stock, flash });
+        batch.update(doc(db, "products", id), {
+          name: row.querySelector(".edit-name").value.trim(),
+          price: Number(row.querySelector(".edit-price").value) || 0,
+          stock: Number(row.querySelector(".edit-stock").value) || 0,
+          flash: row.querySelector(".edit-flash").checked
+        });
       });
-
       await batch.commit();
-      alert("Semua perubahan nama, harga, dan stok produk berhasil disimpan!");
+      alert("Perubahan nama, harga, dan stok berhasil disimpan!");
     };
 
     function renderAdminOrders() {
       document.getElementById("adminOrderCount").textContent = orders.length;
       const listEl = document.getElementById("adminOrdersList");
-      if (!orders.length) {
-        listEl.innerHTML = "<p style='color:var(--muted);'>Belum ada pesanan masuk.</p>";
-        return;
-      }
+      if (!orders.length) { listEl.innerHTML = "<p style='color:var(--muted);'>Belum ada pesanan masuk.</p>"; return; }
       listEl.innerHTML = orders.map(o => `
         <div class="order-card">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-            <strong>${o.code} — ${o.customerName}</strong>
-            <span class="status-badge">${o.status}</span>
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+            <strong>${o.code} — ${o.customerName}</strong><span class="status-badge">${o.status}</span>
           </div>
           <div style="font-size:13px; color:var(--muted); margin-bottom:8px;">
-            Total: <strong style="color:var(--gold);">${formatRp(o.total)}</strong> (${o.paymentMethod})<br/>
-            Alamat: ${o.address}
+            Total: <strong style="color:var(--gold);">${formatRp(o.total)}</strong> (${o.paymentMethod})<br/>Alamat: ${o.address}
           </div>
           <select onchange="updateOrderStatus('${o.id}', this.value)" style="margin-bottom:0;">
             <option value="Menunggu Verifikasi" ${o.status === "Menunggu Verifikasi" ? "selected" : ""}>Menunggu Verifikasi</option>
@@ -698,36 +845,30 @@
       `).join("");
     }
 
-    window.updateOrderStatus = async function (orderId, newStatus) {
-      await updateDoc(doc(db, "orders", orderId), { status: newStatus });
+    window.updateOrderStatus = async function (id, status) {
+      await updateDoc(doc(db, "orders", id), { status });
     };
 
     function updateDashboardStats() {
-      const verifiedOrders = orders.filter(o => o.status !== "Menunggu Verifikasi");
-      const omzet = verifiedOrders.reduce((sum, o) => sum + Number(o.total || 0), 0);
-      const pending = orders.filter(o => o.status === "Menunggu Verifikasi").length;
-      const lowStock = products.filter(p => Number(p.stock) <= 10).length;
-
-      document.getElementById("statOmzet").textContent = formatRp(omzet);
+      const verified = orders.filter(o => o.status !== "Menunggu Verifikasi");
+      document.getElementById("statOmzet").textContent = formatRp(verified.reduce((s, o) => s + Number(o.total || 0), 0));
       document.getElementById("statOrders").textContent = orders.length;
-      document.getElementById("statPending").textContent = pending;
-      document.getElementById("statLowStock").textContent = lowStock;
+      document.getElementById("statPending").textContent = orders.filter(o => o.status === "Menunggu Verifikasi").length;
+      document.getElementById("statLowStock").textContent = products.filter(p => Number(p.stock) <= 10).length;
     }
 
     window.saveStoreSettings = async function () {
-      const data = {
+      await setDoc(doc(db, "settings", "store"), {
         wa: document.getElementById("setWa").value.trim(),
         bca: document.getElementById("setBca").value.trim(),
         mandiri: document.getElementById("setMandiri").value.trim(),
         ewallet: document.getElementById("setEwallet").value.trim()
-      };
-      await setDoc(doc(db, "settings", "store"), data, { merge: true });
-      alert("Pengaturan toko berhasil disimpan!");
+      }, { merge: true });
+      alert("Pengaturan toko tersimpan!");
     };
 
     initDatabase();
-    const initialHash = window.location.hash.replace("#", "") || "beranda";
-    navigate(initialHash);
+    navigate(window.location.hash.replace("#", "") || "beranda");
   </script>
 </body>
 </html>
