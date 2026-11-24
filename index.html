@@ -115,7 +115,7 @@
     .admin-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
     .admin-table th { text-align: left; font-size: 12px; color: var(--muted); padding: 8px 4px; border-bottom: 1px solid var(--border); }
     .admin-table td { padding: 8px 4px; border-bottom: 1px solid var(--border); vertical-align: middle; }
-    .admin-table input[type="text"], .admin-table input[type="number"] { margin-bottom: 0; padding: 8px; font-size: 13px; }
+    .admin-table input[type="text"], .admin-table input[type="number"], .admin-table textarea { margin-bottom: 0; padding: 8px; font-size: 13px; }
     .admin-table input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--gold); }
     .cart-item { display: flex; justify-content: space-between; align-items: center; background: var(--card); padding: 12px; border-radius: 12px; margin-bottom: 10px; border: 1px solid var(--border); }
     .order-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 12px; }
@@ -316,17 +316,18 @@
 
       <div id="adm-produk" class="adm-sub" style="display:none;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-          <span style="font-size:13px; color:var(--muted);">Edit nama, harga, atau stok langsung di bawah:</span>
+          <span style="font-size:13px; color:var(--muted);">Edit nama, kategori, harga, stok, atau deskripsi:</span>
           <button class="btn btn-ghost btn-sm" onclick="addNewProductRow()">+ Produk Baru</button>
         </div>
         <div style="overflow-x:auto;">
           <table class="admin-table">
             <thead>
               <tr>
-                <th style="min-width:140px;">Produk</th>
-                <th style="min-width:100px;">Harga</th>
+                <th style="min-width:160px;">Produk & Kategori</th>
+                <th style="min-width:90px;">Harga</th>
                 <th style="min-width:65px;">Stok</th>
-                <th>Flash</th>
+                <th style="text-align:center;">Flash</th>
+                <th style="min-width:180px;">Deskripsi Modal</th>
                 <th>Aksi</th>
               </tr>
             </thead>
@@ -456,8 +457,9 @@
         onSnapshot(prodCol, (snapshot) => {
           if (!snapshot.empty) {
             products = snapshot.docs.map(d => {
+              const data = d.data();
               const def = defaultProducts.find(x => x.id === d.id) || {};
-              return { ...def, id: d.id, ...d.data() };
+              return { ...def, id: d.id, ...data };
             });
             renderAllViews();
             renderAdminProducts();
@@ -489,14 +491,18 @@
 
     // Countdown Timer Flash Sale
     setInterval(() => {
-      let h = Number(document.getElementById("tHour").textContent);
-      let m = Number(document.getElementById("tMin").textContent);
-      let s = Number(document.getElementById("tSec").textContent);
+      let hEl = document.getElementById("tHour");
+      let mEl = document.getElementById("tMin");
+      let sEl = document.getElementById("tSec");
+      if (!hEl || !mEl || !sEl) return;
+      let h = Number(hEl.textContent);
+      let m = Number(mEl.textContent);
+      let s = Number(sEl.textContent);
       if (s > 0) s--;
       else { s = 59; if (m > 0) m--; else { m = 59; h = h > 0 ? h - 1 : 11; } }
-      document.getElementById("tHour").textContent = String(h).padStart(2, "0");
-      document.getElementById("tMin").textContent = String(m).padStart(2, "0");
-      document.getElementById("tSec").textContent = String(s).padStart(2, "0");
+      hEl.textContent = String(h).padStart(2, "0");
+      mEl.textContent = String(m).padStart(2, "0");
+      sEl.textContent = String(s).padStart(2, "0");
     }, 1000);
 
     // Ketuk Logo 5 Kali untuk Masuk Admin
@@ -589,9 +595,12 @@
 
     function renderAllViews() {
       const flash = products.filter(p => p.flash);
-      document.getElementById("flashScroll").innerHTML = flash.map(createCardHTML).join("");
-      document.getElementById("bestGrid").innerHTML = products.slice(0, 4).map(createCardHTML).join("");
-      document.getElementById("newGrid").innerHTML = products.slice(4).map(createCardHTML).join("");
+      const flashScroll = document.getElementById("flashScroll");
+      const bestGrid = document.getElementById("bestGrid");
+      const newGrid = document.getElementById("newGrid");
+      if (flashScroll) flashScroll.innerHTML = flash.map(createCardHTML).join("");
+      if (bestGrid) bestGrid.innerHTML = products.slice(0, 4).map(createCardHTML).join("");
+      if (newGrid) newGrid.innerHTML = products.slice(4).map(createCardHTML).join("");
       renderCatalog();
       renderWishlist();
       updateBadges();
@@ -599,30 +608,38 @@
 
     window.filterByMood = function (keyword) {
       navigate("katalog");
-      document.getElementById("searchInput").value = keyword;
-      renderCatalog();
+      const searchInput = document.getElementById("searchInput");
+      if (searchInput) {
+        searchInput.value = keyword;
+        renderCatalog();
+      }
     };
 
     window.renderCatalog = function () {
-      const q = (document.getElementById("searchInput")?.value || "").toLowerCase();
+      const searchInput = document.getElementById("searchInput");
+      const q = (searchInput?.value || "").toLowerCase();
+      const catalogGrid = document.getElementById("catalogGrid");
+      if (!catalogGrid) return;
       const filtered = products.filter(p =>
         p.name.toLowerCase().includes(q) || (p.category || "").toLowerCase().includes(q)
       );
-      document.getElementById("catalogGrid").innerHTML = filtered.map(createCardHTML).join("");
+      catalogGrid.innerHTML = filtered.map(createCardHTML).join("");
     };
 
     window.openProductDetail = function (id) {
       const p = products.find(x => x.id === id);
       if (!p) return;
       const isWished = wishlist.includes(p.id);
-      document.getElementById("detailModalContent").innerHTML = `
+      const detailContent = document.getElementById("detailModalContent");
+      if (!detailContent) return;
+      detailContent.innerHTML = `
         <button class="modal-close" onclick="closeModal('detailModal')">✕</button>
-        <div class="sec-kicker" style="margin-top:0;">${p.category}</div>
+        <div class="sec-kicker" style="margin-top:0;">${p.category || 'PARFUM'}</div>
         <div style="background:${p.bg || '#f5e6d3'}; border-radius:16px; height:170px; display:flex; align-items:center; justify-content:center; margin:12px 0;">
           ${getBottleSVG(p.bottle)}
         </div>
         <h3 style="font-size:24px; margin-bottom:6px;">${p.name}</h3>
-        <div class="p-rating" style="margin-bottom:10px;"><span>★★★★★</span> ${p.rating || '4.8 | Terlaris'} · Stok: ${p.stock}</div>
+        <div class="p-rating" style="margin-bottom:10px;"><span>★★★★★</span> ${p.rating || '4.8 | Terlaris'} · Stok: ${p.stock || 0}</div>
         <p style="font-size:13px; color:var(--muted); line-height:1.5; margin-bottom:16px;">${p.desc || 'Extrait de Parfum 30 ml, awet 8–12 jam.'}</p>
         <div style="font-size:22px; font-weight:800; margin-bottom:16px;">${formatRp(p.price)}</div>
         <div style="display:flex; gap:10px;">
@@ -630,19 +647,22 @@
           <button class="btn btn-ghost" onclick="toggleWish('${p.id}'); openProductDetail('${p.id}')">${isWished ? '❤️' : '♡'}</button>
         </div>
       `;
-      document.getElementById("detailModal").classList.add("open");
+      const detailModal = document.getElementById("detailModal");
+      if (detailModal) detailModal.classList.add("open");
     };
 
-    window.openQuiz = function () { document.getElementById("quizModal").classList.add("open"); };
-    window.closeModal = function (id) { document.getElementById(id).classList.remove("open"); };
+    window.openQuiz = function () { const m = document.getElementById("quizModal"); if(m) m.classList.add("open"); };
+    window.closeModal = function (id) { const m = document.getElementById(id); if(m) m.classList.remove("open"); };
     window.finishQuiz = function (prodId) {
       closeModal("quizModal");
       openProductDetail(prodId);
     };
 
     window.renderWishlist = function () {
+      const wishGrid = document.getElementById("wishGrid");
+      if (!wishGrid) return;
       const wishedProds = products.filter(p => wishlist.includes(p.id));
-      document.getElementById("wishGrid").innerHTML = wishedProds.length
+      wishGrid.innerHTML = wishedProds.length
         ? wishedProds.map(createCardHTML).join("")
         : "<p style='color:var(--muted); grid-column:1/-1; text-align:center; padding:32px 0;'>Belum ada parfum favorit.</p>";
     };
@@ -666,13 +686,16 @@
     };
 
     function updateBadges() {
-      document.getElementById("cartBadge").textContent = cart.reduce((s, i) => s + i.qty, 0);
-      document.getElementById("wishBadge").textContent = wishlist.length;
+      const cartBadge = document.getElementById("cartBadge");
+      const wishBadge = document.getElementById("wishBadge");
+      if (cartBadge) cartBadge.textContent = cart.reduce((s, i) => s + i.qty, 0);
+      if (wishBadge) wishBadge.textContent = wishlist.length;
     }
 
     window.renderCart = function () {
       const listEl = document.getElementById("cartList");
       const boxEl = document.getElementById("checkoutBox");
+      if (!listEl || !boxEl) return;
       if (!cart.length) {
         listEl.innerHTML = "<p style='color:var(--muted);'>Keranjang belanja masih kosong.</p>";
         boxEl.style.display = "none";
@@ -695,9 +718,12 @@
 
       const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
       const discount = Math.round(subtotal * activeDiscount);
-      document.getElementById("subTotalText").textContent = formatRp(subtotal);
-      document.getElementById("discountText").textContent = "-" + formatRp(discount);
-      document.getElementById("grandTotalText").textContent = formatRp(subtotal - discount);
+      const subTotalText = document.getElementById("subTotalText");
+      const discountText = document.getElementById("discountText");
+      const grandTotalText = document.getElementById("grandTotalText");
+      if (subTotalText) subTotalText.textContent = formatRp(subtotal);
+      if (discountText) discountText.textContent = "-" + formatRp(discount);
+      if (grandTotalText) grandTotalText.textContent = formatRp(subtotal - discount);
       updatePaymentInfo();
     };
 
@@ -710,7 +736,8 @@
     };
 
     window.applyVoucher = function () {
-      const code = document.getElementById("voucherInput").value.trim().toUpperCase();
+      const vInput = document.getElementById("voucherInput");
+      const code = (vInput?.value || "").trim().toUpperCase();
       if (code === "GOGOYAN10") { activeDiscount = 0.10; alert("Diskon 10% diterapkan!"); }
       else { activeDiscount = 0; alert("Kode voucher tidak valid."); }
       renderCart();
@@ -724,13 +751,14 @@
       else if (method === "Mandiri") infoEl.textContent = "Tujuan Transfer: " + storeSettings.mandiri;
       else infoEl.textContent = "Tujuan Pembayaran: " + storeSettings.ewallet;
     }
-    document.getElementById("payMethod").addEventListener("change", updatePaymentInfo);
+    const payMethodEl = document.getElementById("payMethod");
+    if (payMethodEl) payMethodEl.addEventListener("change", updatePaymentInfo);
 
     window.submitOrder = async function () {
-      const name = document.getElementById("custName").value.trim();
-      const phone = document.getElementById("custPhone").value.trim();
-      const address = document.getElementById("custAddress").value.trim();
-      const method = document.getElementById("payMethod").value;
+      const name = document.getElementById("custName")?.value.trim();
+      const phone = document.getElementById("custPhone")?.value.trim();
+      const address = document.getElementById("custAddress")?.value.trim();
+      const method = document.getElementById("payMethod")?.value;
       if (!name || !phone || !address) { alert("Lengkapi nama, WhatsApp, dan alamat."); return; }
 
       const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
@@ -754,14 +782,16 @@
       updateBadges(); renderCart();
       alert(`Pesanan berhasil!\nKode Pesanan: ${orderCode}`);
       navigate("lacak");
-      document.getElementById("trackCodeInput").value = orderCode;
+      const trackInput = document.getElementById("trackCodeInput");
+      if (trackInput) trackInput.value = orderCode;
       trackOrder();
     };
 
     window.trackOrder = async function () {
-      const code = document.getElementById("trackCodeInput").value.trim().toUpperCase();
+      const trackInput = document.getElementById("trackCodeInput");
+      const code = (trackInput?.value || "").trim().toUpperCase();
       const resEl = document.getElementById("trackResult");
-      if (!code) return;
+      if (!code || !resEl) return;
       const snap = await getDoc(doc(db, "orders", code));
       if (!snap.exists()) { resEl.innerHTML = "<p style='color:var(--red);'>Kode tidak ditemukan.</p>"; return; }
       const o = snap.data();
@@ -780,17 +810,26 @@
     window.switchAdminTab = function (tabName, btn) {
       document.querySelectorAll(".adm-sub").forEach(el => el.style.display = "none");
       document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
-      document.getElementById("adm-" + tabName).style.display = "block";
-      btn.classList.add("active");
+      const targetSub = document.getElementById("adm-" + tabName);
+      if (targetSub) targetSub.style.display = "block";
+      if (btn) btn.classList.add("active");
     };
 
     function renderAdminProducts() {
-      document.getElementById("adminProductTbody").innerHTML = products.map(p => `
+      const tbody = document.getElementById("adminProductTbody");
+      if (!tbody) return;
+      tbody.innerHTML = products.map(p => `
         <tr data-id="${p.id}">
-          <td><input type="text" class="edit-name" value="${p.name}" /></td>
+          <td>
+            <input type="text" class="edit-name" value="${p.name}" placeholder="Nama Produk" />
+            <input type="text" class="edit-cat" value="${p.category || 'PARFUM'}" placeholder="Kategori" style="margin-top:6px; font-size:12px; color:var(--muted); font-weight:600;" />
+          </td>
           <td><input type="number" class="edit-price" value="${p.price}" /></td>
           <td><input type="number" class="edit-stock" value="${p.stock}" /></td>
           <td style="text-align:center;"><input type="checkbox" class="edit-flash" ${p.flash ? "checked" : ""} /></td>
+          <td>
+            <textarea class="edit-desc" rows="3" placeholder="Deskripsi untuk modal detail..." style="font-size:12px; line-height:1.4;">${p.desc || ''}</textarea>
+          </td>
           <td><button class="btn btn-ghost btn-sm" style="color:var(--red);" onclick="deleteProduct('${p.id}')">Hapus</button></td>
         </tr>
       `).join("");
@@ -798,38 +837,51 @@
 
     window.addNewProductRow = async function () {
       const newId = "p" + Date.now();
-      await setDoc(doc(db, "products", newId), {
-        id: newId, name: "Parfum Baru", category: "EXTRAIT · UNISEX",
-        price: 199000, stock: 25, flash: false, bg: "#f5e6d3", bottle: "#eab308"
-      });
+      const newProductData = {
+        id: newId,
+        name: "Parfum Baru",
+        category: "EXTRAIT · UNISEX",
+        price: 199000,
+        stock: 25,
+        flash: false,
+        bg: "#f5e6d3",
+        bottle: "#eab308",
+        desc: "Extrait de Parfum 30 ml, awet 8–12 jam dengan aroma khas dan elegan."
+      };
+      await setDoc(doc(db, "products", newId), newProductData);
     };
 
     window.deleteProduct = async function (id) {
-      if (confirm("Hapus produk ini?")) await deleteDoc(doc(db, "products", id));
+      if (confirm("Hapus produk ini dari database?")) await deleteDoc(doc(db, "products", id));
     };
 
     window.saveAllProducts = async function () {
       const batch = writeBatch(db);
-      document.querySelectorAll("#adminProductTbody tr").forEach(row => {
+      const rows = document.querySelectorAll("#adminProductTbody tr");
+      rows.forEach(row => {
         const id = row.getAttribute("data-id");
         batch.update(doc(db, "products", id), {
           name: row.querySelector(".edit-name").value.trim(),
+          category: row.querySelector(".edit-cat").value.trim(),
           price: Number(row.querySelector(".edit-price").value) || 0,
           stock: Number(row.querySelector(".edit-stock").value) || 0,
-          flash: row.querySelector(".edit-flash").checked
+          flash: row.querySelector(".edit-flash").checked,
+          desc: row.querySelector(".edit-desc").value.trim()
         });
       });
       await batch.commit();
-      alert("Perubahan nama, harga, dan stok berhasil disimpan!");
+      alert("Semua perubahan termasuk kategori dan deskripsi berhasil disimpan!");
     };
 
     function renderAdminOrders() {
-      document.getElementById("adminOrderCount").textContent = orders.length;
+      const orderCountEl = document.getElementById("adminOrderCount");
       const listEl = document.getElementById("adminOrdersList");
+      if (orderCountEl) orderCountEl.textContent = orders.length;
+      if (!listEl) return;
       if (!orders.length) { listEl.innerHTML = "<p style='color:var(--muted);'>Belum ada pesanan masuk.</p>"; return; }
       listEl.innerHTML = orders.map(o => `
         <div class="order-card">
-          <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
             <strong>${o.code} — ${o.customerName}</strong><span class="status-badge">${o.status}</span>
           </div>
           <div style="font-size:13px; color:var(--muted); margin-bottom:8px;">
@@ -851,10 +903,14 @@
 
     function updateDashboardStats() {
       const verified = orders.filter(o => o.status !== "Menunggu Verifikasi");
-      document.getElementById("statOmzet").textContent = formatRp(verified.reduce((s, o) => s + Number(o.total || 0), 0));
-      document.getElementById("statOrders").textContent = orders.length;
-      document.getElementById("statPending").textContent = orders.filter(o => o.status === "Menunggu Verifikasi").length;
-      document.getElementById("statLowStock").textContent = products.filter(p => Number(p.stock) <= 10).length;
+      const omzetEl = document.getElementById("statOmzet");
+      const ordersEl = document.getElementById("statOrders");
+      const pendingEl = document.getElementById("statPending");
+      const lowStockEl = document.getElementById("statLowStock");
+      if (omzetEl) omzetEl.textContent = formatRp(verified.reduce((s, o) => s + Number(o.total || 0), 0));
+      if (ordersEl) ordersEl.textContent = orders.length;
+      if (pendingEl) pendingEl.textContent = orders.filter(o => o.status === "Menunggu Verifikasi").length;
+      if (lowStockEl) lowStockEl.textContent = products.filter(p => Number(p.stock) <= 10).length;
     }
 
     window.saveStoreSettings = async function () {
